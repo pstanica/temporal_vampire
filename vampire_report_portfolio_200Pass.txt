@@ -1,0 +1,212 @@
+# VAMPIRE TEST REPORT - PORTFOLIO
+# Strategy: fixed axioms portfolio, first success wins
+# Generated: 2025-12-30 20:42:17
+# Timeout: 61s per attempt
+# Axioms order: DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff, DateArithmetic_Best1_PORTFOLIO.tff, DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff
+# Raw logs dir: raw_logs
+##############################################################################################################
+Test                           |     Time | Status               | Result    | Trace
+--------------------------------------------------------------------------------------------------------------
+test_time_overflow |   1890 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1890ms
+test_min_roll |   1799 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1799ms
+test_large_time |   1884 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1884ms
+test_new_year_time |   1787 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1787ms
+test_nth_thursday |    395 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@395ms
+test_first_monday |    376 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@376ms
+test_4th_friday |    397 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@397ms
+test_simple_add |    422 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@422ms
+test_month_roll |    382 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@382ms
+test_large_add |    403 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@403ms
+test_simple_sub |    436 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@436ms
+test_back_leap |    381 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@381ms
+test_year_back |   1792 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1792ms
+test_leap_ok |    386 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@386ms
+test_leap_no |    373 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@373ms
+test_1900 |    374 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@374ms
+test_2000 |    376 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@376ms
+test_add_week |   8882 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@8882ms
+test_next_year |    381 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@381ms
+test_ny_fwd |   1175 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1175ms
+test_big_jump |    388 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@388ms
+test_2yr_jump |    399 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@399ms
+test_1776 |     46 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@46ms
+test_moon |     33 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@33ms
+test_bttf |     41 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@41ms
+test_1600 |     51 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@51ms
+test_dec_bound |    391 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@391ms
+test_zero |    387 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@387ms
+test_2030 |     33 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@33ms
+test_leap_wk |     31 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@31ms
+test_scale_fwd_1k |    378 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@378ms
+test_scale_fwd_5k |    387 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@387ms
+test_scale_fwd_10k |    380 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@380ms
+test_scale_fwd_50k |    397 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@397ms
+test_scale_fwd_100k |    389 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@389ms
+test_scale_back_1k |    383 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@383ms
+test_scale_back_5k |    388 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@388ms
+test_scale_back_10k |    402 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@402ms
+test_scale_back_50k |    375 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@375ms
+test_scale_back_100k |    374 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@374ms
+test_accel_century_r |   1811 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1811ms
+test_accel_decade_r |   1801 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1801ms
+test_accel_quad_r |   1813 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1813ms
+test_accel_year_r |   1810 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1810ms
+test_accel_leap_skip |  14031 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@14031ms
+test_accel_back_century |   3537 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@3537ms
+test_accel_back_decade |   1184 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60973ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60978ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@1184ms
+test_accel_mix_leap |   1176 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60985ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@1176ms
+test_accel_mix_norm |    375 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60976ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@375ms
+test_cent_100_fwd |   1801 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1801ms
+test_cent_400_minus_1 |   1903 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60977ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@1903ms
+test_cent_100_plus_1 |    373 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@373ms
+test_cent_4_plus_1 |   1948 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60972ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@1948ms
+test_cent_4_minus_1 |   5052 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60982ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@5052ms
+test_wk_oct31_2024 |     34 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@34ms
+test_nov_plus_50 |   1950 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1950ms
+test_april_minus_10 |   1946 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1946ms
+test_dec_plus_30 |   1177 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1177ms
+test_may_plus_75 |   1933 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1933ms
+test_wk_dec25_2024 |     58 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@58ms
+test_feb_minus_30 |   1952 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1952ms
+test_sch_1st_sun_may |   2027 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60976ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@2027ms
+test_sch_1st_thu_may |  44490 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@44490ms
+test_sch_4th_sat_nov |   2030 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@2030ms
+test_sch_4th_mon_nov |  14031 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@14031ms
+test_sch_last_mon_mar |  13973 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@13973ms
+test_sch_last_thu_mar |    141 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60959ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60971ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@141ms
+test_sch_last_fri_mar |    145 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60969ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60938ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@145ms
+test_sch_last_sat_mar |   2013 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@2013ms
+test_sch_last_sun_mar |   2061 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60980ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@2061ms
+test_sch_last_mon_mar_2 |   5054 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@5054ms
+test_sch_leap_1st_thu |  44487 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@44487ms
+test_sch_leap_4th_thu |   2028 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60977ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@2028ms
+test_sch_leap_5th_thu_end |   1831 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1831ms
+test_wk_2024_jul4 |     35 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@35ms
+test_wk_2025_jul4 |     37 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@37ms
+test_wk_2026_jul4 |     38 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@38ms
+test_wk_2027_jul4 |     48 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@48ms
+test_wk_2028_jul4 |     35 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@35ms
+test_wk_2029_jul4 |     42 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@42ms
+test_wk_2030_jul4 |     33 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@33ms
+test_wk_2031_jul4 |     38 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@38ms
+test_wk_2032_jul4 |     46 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@46ms
+test_wk_2033_jul4 |     45 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@45ms
+test_wk_jan1_2024 |     39 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@39ms
+test_wk_feb29_2024 |     41 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@41ms
+test_wk_mar1_2024 |     37 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@37ms
+test_wk_dec31_2024 |     33 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@33ms
+test_wk_jan1_2025 |     46 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@46ms
+test_wk_feb1_2025 |     88 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@88ms
+test_wk_feb28_2025 |     43 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@43ms
+test_wk_mar1_2025 |     42 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@42ms
+test_wk_old_bce |     41 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@41ms
+test_wk_far_future |     32 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@32ms
+test_wk_jun15_2024 |     35 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@35ms
+test_may_boundary |   1974 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1974ms
+test_mar_back_leap |    398 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@398ms
+test_wk_aug15_2024 |     31 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@31ms
+test_june_july_boundary |   1927 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1927ms
+test_oct_back_sept |   1918 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1918ms
+test_wk_sept1_2024 |     39 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@39ms
+test_july_plus_20 |   1952 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1952ms
+test_aug_sept_boundary |   1976 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1976ms
+test_sch_3rd_wed_oct |   2025 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60980ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@2025ms
+test_sch_2nd_fri_dec |   1817 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1817ms
+test_may_back_100 |   1947 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1947ms
+test_mar_plus_200 |   1964 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1964ms
+test_comb_leap_dt |     40 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@40ms
+test_comb_back_dt |   1885 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1885ms
+test_comb_jan_back_dt |   1887 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1887ms
+test_comb_sch_1 |  15140 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60983ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60996ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@15140ms
+test_comb_sch_2 |  14768 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60967ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60996ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@14768ms
+test_comb_date_wk_fwd |   2149 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@2149ms
+test_comb_date_wk_back |     35 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60983ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60938ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@35ms
+test_comb_sch_5th_feb_fail |   2011 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@2011ms
+test_comb_sch_5th_aug |   2025 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60960ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@2025ms
+test_sub_1 |    396 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60986ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60947ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@396ms
+test_sub_2 |   8825 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60968ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@8825ms
+test_sub_3 |    379 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@379ms
+test_sub_4 |    385 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@385ms
+test_sub_5 |   1911 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1911ms
+test_sub_6 |   1924 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1924ms
+test_sub_8 |   8416 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60983ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@8416ms
+test_sub_9 |   8825 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60966ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@8825ms
+test_sub_10 |     36 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60955ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60948ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@36ms
+test_leap_def_2024 |     24 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@24ms
+test_leap_def_2025 |     32 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@32ms
+test_leap_def_2000 |   1080 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60974ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@1080ms
+test_leap_def_1900 |    545 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60997ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@545ms
+test_leap_def_1600 |    719 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60965ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@719ms
+test_leap_def_2100 |    548 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60963ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@548ms
+test_leap_def_2400 |   1060 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60992ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@1060ms
+test_leap_def_1904 |    718 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60974ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@718ms
+test_leap_def_1903 |    344 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60963ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@344ms
+test_leap_def_3996 |    723 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60997ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@723ms
+test_leap_fwd_1 |    421 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@421ms
+test_leap_fwd_2 |    387 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@387ms
+test_leap_fwd_3 |   1938 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1938ms
+test_leap_fwd_4 |   1955 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1955ms
+test_leap_back_1 |    427 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@427ms
+test_leap_back_2 |    376 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@376ms
+test_leap_back_3 |    404 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@404ms
+test_leap_back_4 |   1972 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1972ms
+test_leap_back_5 |   1967 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1967ms
+test_leap_back_6 |   1924 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1924ms
+test_feb_boundary_leap_vs_nonleap |    385 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@385ms
+test_fwd_M1_35 |    377 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@377ms
+test_fwd_M2_35 |   1930 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1930ms
+test_fwd_M3_35 |   1948 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1948ms
+test_fwd_M4_35 |   1944 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1944ms
+test_fwd_M5_35 |   1956 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1956ms
+test_fwd_M6_35 |   1980 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1980ms
+test_fwd_M7_35 |   1933 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1933ms
+test_fwd_M8_35 |   1964 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1964ms
+test_fwd_M9_35 |   1935 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1935ms
+test_fwd_M10_35 |   1922 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1922ms
+test_back_M2_N5 |   1952 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1952ms
+test_back_M3_N5 |   1924 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1924ms
+test_back_M4_N5 |   1942 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1942ms
+test_back_M5_N5 |   1981 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1981ms
+test_back_M6_N5 |   1958 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1958ms
+test_back_M7_N5 |   1973 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1973ms
+test_back_M8_N5 |   1919 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1919ms
+test_back_M9_N5 |   1908 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1908ms
+test_back_M10_N5 |   1911 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1911ms
+test_back_M11_N5 |   1911 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1911ms
+test_mix_m_long_fwd |   1977 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1977ms
+test_mix_m_long_back |    146 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60978ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60994ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@146ms
+test_mix_m_short_fwd |   1926 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1926ms
+test_mix_m_short_back |    138 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60965ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@61000ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@138ms
+test_mix_yr_fwd_1 |    422 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@422ms
+test_mix_yr_fwd_2 |   1957 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1957ms
+test_mix_yr_fwd_3 |   1790 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1790ms
+test_mix_yr_back_1 |   1789 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1789ms
+test_mix_yr_back_2 |   8822 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60964ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@8822ms
+test_mix_yr_back_3 |   8821 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60966ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@8821ms
+test_quad_fwd_leap_1 |   1169 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1169ms
+test_quad_fwd_leap_2 |   1169 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1169ms
+test_quad_fwd_norm_1 |  14327 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@14327ms
+test_quad_fwd_norm_2 |   1171 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60983ms; DateArithmetic_Best1_PORTFOLIO.tff:Theorem@1171ms
+test_quad_fwd_norm_3 |  14273 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@14273ms
+test_quad_back_leap_1 |     32 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60975ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@61034ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@32ms
+test_quad_back_leap_2 |     34 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60967ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60976ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@34ms
+test_quad_back_norm_1 |    396 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60967ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60948ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@396ms
+test_quad_back_norm_2 |    389 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60977ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60989ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@389ms
+test_quad_back_norm_3 |    389 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60978ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60933ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@389ms
+test_decade_fwd_1 |   1793 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1793ms
+test_decade_fwd_2 |  39155 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@39155ms
+test_decade_fwd_3 |   1809 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1809ms
+test_decade_back_1 |   1176 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60977ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60925ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@1176ms
+test_decade_back_2 |   1169 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60988ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60923ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@1169ms
+test_decade_back_3 |   1171 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60958ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60991ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@1171ms
+test_decade_mix_1 |  14263 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@14263ms
+test_decade_mix_2 |     34 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60981ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60970ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@34ms
+test_decade_mix_3 |    149 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60933ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60933ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@149ms
+test_decade_mix_4 |     37 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60958ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60949ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@37ms
+test_trap_calc_2 |   1957 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1957ms
+test_trap_calc_3 |   1958 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@1958ms
+test_trap_calc_4 |    141 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Timeout@60994ms; DateArithmetic_Best1_PORTFOLIO.tff:Timeout@60942ms; DateArithmetic_Completion_SAFE_HEAVY_PLUS_v3.tff:Theorem@141ms
+test_trap_wk |  39360 ms | Theorem              | SUCCESS   | DateArithmetic_TemporalSuiteBest0_PORTFOLIO.tff:Theorem@39360ms
+--------------------------------------------------------------------------------------------------------------
+
+# SUMMARY: 200/200 passed (1:17:48.922588)
