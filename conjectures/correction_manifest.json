@@ -1,0 +1,214 @@
+{
+  "source": "source_benchmark_raw.tff",
+  "corrected_file": "ground_200_corrected.tff",
+  "total_conjectures": 200,
+  "structural_subset_count": 41,
+  "extended_subset_count": 159,
+  "changes": [
+    {
+      "test": "test_scale_fwd_5k",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2037,
+        9,
+        9
+      ]
+    },
+    {
+      "test": "test_scale_fwd_50k",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2160,
+        11,
+        23
+      ]
+    },
+    {
+      "test": "test_scale_back_10k",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        1996,
+        8,
+        15
+      ]
+    },
+    {
+      "test": "test_scale_back_50k",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        1887,
+        2,
+        8
+      ]
+    },
+    {
+      "test": "test_scale_back_100k",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        1750,
+        3,
+        18
+      ]
+    },
+    {
+      "test": "test_accel_back_century",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        1924,
+        1,
+        1
+      ]
+    },
+    {
+      "test": "test_accel_back_decade",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2013,
+        12,
+        30
+      ]
+    },
+    {
+      "test": "test_sub_1",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2023,
+        12,
+        21
+      ]
+    },
+    {
+      "test": "test_sub_3",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        1996,
+        8,
+        15
+      ]
+    },
+    {
+      "test": "test_mix_m_long_back",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2023,
+        12,
+        28
+      ]
+    },
+    {
+      "test": "test_mix_m_short_back",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2024,
+        3,
+        30
+      ]
+    },
+    {
+      "test": "test_quad_fwd_leap_1",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2028,
+        1,
+        1
+      ]
+    },
+    {
+      "test": "test_quad_fwd_leap_2",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2032,
+        1,
+        1
+      ]
+    },
+    {
+      "test": "test_quad_back_norm_1",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2025,
+        1,
+        1
+      ]
+    },
+    {
+      "test": "test_quad_back_norm_2",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2026,
+        1,
+        1
+      ]
+    },
+    {
+      "test": "test_quad_back_norm_3",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2027,
+        1,
+        1
+      ]
+    },
+    {
+      "test": "test_decade_fwd_2",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2034,
+        1,
+        1
+      ]
+    },
+    {
+      "test": "test_decade_mix_1",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2044,
+        12,
+        31
+      ]
+    },
+    {
+      "test": "test_decade_mix_2",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2074,
+        12,
+        30
+      ]
+    },
+    {
+      "test": "test_decade_mix_4",
+      "kind": "Gregorian expected-date correction",
+      "new_expected": [
+        2115,
+        12,
+        30
+      ]
+    },
+    {
+      "test": "test_sch_last_mon_mar",
+      "renamed_to": "test_sch_4th_mon_mar",
+      "kind": "scheduler semantic correction"
+    },
+    {
+      "test": "test_sub_10",
+      "kind": "time normalization day-delta correction",
+      "new_day_delta": -1
+    },
+    {
+      "test": "test_comb_sch_5th_feb_fail",
+      "renamed_to": "test_comb_sch_4th_fri_feb_end",
+      "kind": "misleading identifier cleanup"
+    },
+    {
+      "test": "test_wk_old_bce",
+      "renamed_to": "test_wk_year1",
+      "kind": "misleading identifier cleanup"
+    },
+    {
+      "test": "test_wk_far_future",
+      "renamed_to": "test_wk_2030_dec31",
+      "kind": "misleading identifier cleanup"
+    }
+  ]
+}

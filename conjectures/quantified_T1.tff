@@ -1,0 +1,25 @@
+% Quantified/relational queries expressible in T1 vocabulary.
+
+tff(q1_exists_friday13_2026, conjecture,
+ ?[M:$int]:
+  ($lesseq(1,M) & $lesseq(M,12) & valid_date(2026,M,13) & weekday(ymd(2026,M,13),friday))).
+
+tff(q2_first_friday13_month_2026, conjecture,
+ ?[M:$int]:
+  ($lesseq(1,M) & $lesseq(M,12) & valid_date(2026,M,13) & weekday(ymd(2026,M,13),friday) &
+   ![M2:$int]:
+    (($lesseq(1,M2) & $less(M2,M)) => ~weekday(ymd(2026,M2,13),friday)))).
+
+tff(q3_month_length_unique, conjecture,
+ ![Y:$int,M:$int,L1:$int,L2:$int]:
+  ((is_days_in_month(M,Y,L1) & is_days_in_month(M,Y,L2)) => L1=L2)).
+
+tff(q4_weekday_unique, conjecture,
+ ![Y:$int,M:$int,D:$int,W1:day_name,W2:day_name]:
+  ((weekday(ymd(Y,M,D),W1) & weekday(ymd(Y,M,D),W2)) => W1=W2)).
+
+tff(q5_feb1900_is_28, conjecture,
+ ![L:$int]: (is_days_in_month(2,1900,L) => L=28)).
+
+tff(q6_feb2000_is_29, conjecture,
+ ![L:$int]: (is_days_in_month(2,2000,L) => L=29)).

@@ -1,0 +1,19 @@
+{
+  "tiers": [
+    "T1_structural.tff",
+    "T2_core_no_accel.tff",
+    "T2_full_sound.tff",
+    "T3_validated_anchors.tff"
+  ],
+  "accelerator_components": [
+    "1y",
+    "4y",
+    "10y",
+    "100y",
+    "400y",
+    "month_hopper",
+    "weekday400"
+  ],
+  "t3_anchor_count": 66,
+  "t3_anchor_policy": "intermediate only: month-start weekdays, exact year-span lengths, February lengths; no direct 200-query calc_date answers"
+}

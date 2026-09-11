@@ -1,0 +1,1234 @@
+TEMPORAL EXPERIMENT ARTIFACT
+STEP-BY-STEP REPRODUCTION GUIDE AND EXACT PAPER-RUN COMMANDS
+=======================================================================
+
+Purpose
+-------
+This file explains the final artifact, the generated theory files, the
+ablation variants, the conjecture files, the Python scripts, and the command
+sequence used for the retained experiments in raw_results/.
+
+The commands below reproduce the scientific setup of the retained paper runs:
+  * fresh prover process for every theory/conjecture pair;
+  * 60 second timeout per pair;
+  * --seed-mode none (no Python-computed answer facts injected into problems);
+  * exact TFF0 theories distributed in theories/;
+  * corrected 200-conjecture benchmark in conjectures/ground_200_corrected.tff;
+  * dedicated Z3 TPTP frontend z3_tptp5, not the ordinary z3 executable.
+
+The retained raw result archives are:
+
+  raw_results/E2V_full.zip
+  raw_results/E2Z_full.zip
+  raw_results/E4V_add1.zip
+  raw_results/E4Z_add1_1y.zip
+  raw_results/E4Z_add1_4y.zip
+  raw_results/E4Z_add1_10y.zip
+  raw_results/E4Z_add1_100y.zip
+  raw_results/E4Z_add1_400y.zip
+  raw_results/E5V_loo_1y.zip
+  raw_results/E5V_loo_4y.zip
+  raw_results/E5V_loo_10y.zip
+  raw_results/E5V_loo_100y.zip
+  raw_results/E5V_loo_400y.zip
+  raw_results/E5V_loo_month_hopper.zip
+  raw_results/E5V_loo_weekday400.zip
+  raw_results/E6V_quantified_T1.zip
+  raw_results/E6Z_quantified_T1.zip
+
+Development-only runs that are not in this list are not part of the final
+paper data. In particular, do not mix old seeded runs, obsolete theory files,
+or exploratory pilot runs with the final raw_results/ archives.
+
+
+=======================================================================
+1. DIRECTORY LAYOUT
+=======================================================================
+
+At the artifact root:
+
+  README.md
+  RESULTS_INDEX.md
+  VALIDATION_REPORT.txt
+  MANIFEST_SHA256.txt
+  Z3_TPTP_SETUP_MACOS.txt
+  Z3_FILEARG_FIX.md
+
+  theories/
+    sound_tiers/
+      T1_structural.tff
+      T2_core_no_accel.tff
+      T2_full_sound.tff
+      T3_validated_anchors.tff
+
+    ablation_variants/
+      ADD1__1y.tff
+      ADD1__4y.tff
+      ADD1__10y.tff
+      ADD1__100y.tff
+      ADD1__400y.tff
+      ADD1__month_hopper.tff
+      ADD1__weekday400.tff
+
+      LOO__1y.tff
+      LOO__4y.tff
+      LOO__10y.tff
+      LOO__100y.tff
+      LOO__400y.tff
+      LOO__month_hopper.tff
+      LOO__weekday400.tff
+
+      manifest.json
+
+  conjectures/
+    source_benchmark_raw.tff
+    ground_200_corrected.tff
+    structural_subset.tff
+    extended_subset.tff
+    quantified_T1.tff
+    quantified_T2.tff
+    correction_manifest.json
+
+  scripts/
+    build_conjectures.py
+    build_sound_tiers.py
+    run_vampire.py
+    run_z3.py
+    run_preflight.py
+    run_preflight_z3.py
+    static_oracle_check.py
+    audit_anchor_overlap.py
+    verify_reported_results.py
+    validate_suite.py
+    analyze_matrix.py
+    summarize_results.py
+    lib/tptp_utils.py
+
+  raw_results/
+    [the 17 retained ZIP archives listed above]
+
+The run scripts create a working results/ directory. Each experiment directory
+contains:
+
+  results/<EXPERIMENT>/run_metadata.json
+  results/<EXPERIMENT>/results.csv
+  results/<EXPERIMENT>/logs/<THEORY>/<CONJECTURE>.log
+
+The raw_results/*.zip archives are ZIP copies of these experiment directories.
+
+
+=======================================================================
+2. THEORY FILES
+=======================================================================
+
+2.1 T1_structural.tff
+---------------------
+Formula count: 54.
+
+This is the structural calendar theory. It contains:
+  * date and weekday types and ymd(Y,M,D);
+  * injectivity of ymd;
+  * seven distinct weekday constants;
+  * exact Gregorian leap-year definition for positive years;
+  * exact month-length definitions;
+  * year length;
+  * valid_date;
+  * weekday/name integer mappings;
+  * functionality statements;
+  * Gregorian Zeller congruence, split into Jan/Feb and Mar-Dec cases.
+
+It does not contain date-offset normalization, time normalization, scheduling,
+or accelerator axioms.
+
+
+2.2 T2_core_no_accel.tff
+-------------------------
+Formula count: 84.
+
+This contains all of T1 plus the Tier-2 vocabulary and core relations:
+  * time and dt(Y,M,D,H,Min);
+  * calc_date (one-based date index relative to the first day of a month);
+  * normalize_time using Euclidean quotient/remainder;
+  * calc_datetime;
+  * exact nth-weekday scheduling;
+  * separate last-weekday scheduling;
+  * leap_days_before;
+  * exact year_span_days(Y,N,Days).
+
+This file intentionally contains NO accelerator components. It is the baseline
+for the add-one experiments.
+
+
+2.3 T2_full_sound.tff
+----------------------
+Formula count: 97.
+
+This is T2_core_no_accel plus seven semantically justified accelerator
+components:
+
+  1y
+    Forward and backward 1-year date jumps using exact year_span_days.
+
+  4y
+    Forward and backward 4-year date jumps using exact year_span_days.
+
+  10y
+    Forward and backward 10-year date jumps using exact year_span_days.
+
+  100y
+    Forward and backward 100-year date jumps using exact year_span_days.
+
+  400y
+    Forward and backward 400-year date jumps using exact year_span_days.
+
+  month_hopper
+    Two weekday propagation axioms:
+      * first day of one month -> first day of next month;
+      * December -> January of next year.
+
+  weekday400
+    Gregorian 400-year weekday recurrence.
+
+The year-jump components do NOT use globally fixed day counts for 4, 10, or
+100 years. They use year_span_days, so leap-century effects are accounted for.
+
+
+2.4 T3_validated_anchors.tff
+-----------------------------
+Formula count: 163.
+
+This is T2_full_sound plus 66 independently checked closed ground anchors:
+  * month-start weekdays for all months of 2024 and 2025;
+  * exact 4-, 10-, 100-, and 400-year span lengths at selected start years;
+  * February lengths for selected century/leap cases.
+
+The anchor audit reports 12 direct coincidences with structural benchmark
+queries and zero direct coincidences with the 159-query extended subset. This
+is checked by scripts/audit_anchor_overlap.py and scripts/validate_suite.py.
+
+
+=======================================================================
+3. ABLATION VARIANTS
+=======================================================================
+
+The seven components are:
+
+  1y, 4y, 10y, 100y, 400y, month_hopper, weekday400
+
+There are 14 generated ablation theory files.
+
+ADD1__X.tff
+-----------
+Definition:
+
+  T2_core_no_accel + accelerator component X only.
+
+Examples:
+
+  ADD1__1y.tff
+    T2 core plus only the forward/backward 1-year jump axioms.
+
+  ADD1__month_hopper.tff
+    T2 core plus only the two month/year weekday-hop axioms.
+
+  ADD1__weekday400.tff
+    T2 core plus only the 400-year weekday recurrence.
+
+These files answer the question:
+
+  What happens when this accelerator component is added by itself to the
+  unaccelerated Tier-2 core?
+
+
+LOO__X.tff
+----------
+LOO means leave one out.
+
+Definition:
+
+  T2_full_sound minus accelerator component X.
+
+Examples:
+
+  LOO__1y.tff
+    Full Tier-2 accelerator bundle with the 1-year component removed.
+
+  LOO__month_hopper.tff
+    Full bundle with the month_hopper component removed.
+
+These files answer the question:
+
+  What contribution does this component make when all the other accelerators
+  are already present?
+
+scripts/build_sound_tiers.py deterministically creates the four tier files and
+all 14 ablation variants. theories/ablation_variants/manifest.json records the
+seven component names and the Tier-3 anchor policy.
+
+
+=======================================================================
+4. CONJECTURE FILES
+=======================================================================
+
+4.1 source_benchmark_raw.tff
+----------------------------
+This is the source benchmark used by scripts/build_conjectures.py. It is kept
+for provenance and deterministic rebuilding. It is NOT the main benchmark file
+used in the retained paper runs.
+
+
+4.2 ground_200_corrected.tff
+-----------------------------
+This is the main 200-conjecture benchmark used in E2, E4, and E5.
+
+It is generated from source_benchmark_raw.tff by build_conjectures.py after 25
+recorded corrections:
+  * 20 corrected Gregorian expected dates;
+  * 1 scheduler semantic correction;
+  * 1 time-normalization day-delta correction;
+  * 3 misleading identifier cleanups.
+
+All 25 changes are listed in conjectures/correction_manifest.json.
+
+scripts/static_oracle_check.py independently checks all 200 conjectures against
+proleptic Gregorian arithmetic.
+
+
+4.3 structural_subset.tff
+--------------------------
+Contains 41 of the 200 ground conjectures.
+
+These use the structural/T1 vocabulary, such as:
+  * leap year and month length;
+  * valid dates;
+  * weekdays and weekday mapping.
+
+The subset is used for the structural/extended split reported in the paper.
+The retained E2 runs use the complete 200-query file; the split is recomputed
+from the same CSV results, so no separate timing run is required.
+
+
+4.4 extended_subset.tff
+------------------------
+Contains the other 159 of the 200 ground conjectures.
+
+These use Tier-2/extended vocabulary, including examples involving:
+  * calc_date and forward/backward date traversal;
+  * long date offsets;
+  * normalize_time;
+  * calc_datetime;
+  * nth_weekday_date;
+  * last_weekday_date;
+  * mixed date/time/scheduling reasoning.
+
+Tier 3 has zero direct anchor-target coincidences on this 159-query subset.
+
+
+4.5 quantified_T1.tff
+----------------------
+Contains the six quantified/relational conjectures used in E6:
+
+  q1_exists_friday13_2026
+    There exists a month in 2026 whose 13th is Friday.
+
+  q2_first_friday13_month_2026
+    There exists a Friday-the-13th month and no earlier month in 2026 has one.
+
+  q3_month_length_unique
+    Month length is functional/unique.
+
+  q4_weekday_unique
+    Weekday is functional/unique.
+
+  q5_feb1900_is_28
+    Every month-length result for February 1900 equals 28.
+
+  q6_feb2000_is_29
+    Every month-length result for February 2000 equals 29.
+
+These are run under T1, T2 core, T2 full, and T3 for both Vampire and Z3.
+
+
+4.6 quantified_T2.tff
+----------------------
+Contains six additional quantified formulas using Tier-2 vocabulary:
+  * no fifth Friday in February 2025;
+  * unique fifth Thursday in February 2024;
+  * nth-weekday results are valid dates;
+  * last-weekday results are valid dates;
+  * calc_date functionality;
+  * time-normalization functionality.
+
+This file is distributed for completeness, but there is no retained
+raw_results/E6*_quantified_T2.zip in the final paper artifact. Therefore it
+must not be presented as part of the reported E6 timing table unless new runs
+are explicitly performed and documented.
+
+
+=======================================================================
+5. WHAT EACH PYTHON SCRIPT DOES
+=======================================================================
+
+scripts/build_conjectures.py
+-----------------------------
+Reads conjectures/source_benchmark_raw.tff, applies the 25 explicit corrections,
+and writes:
+
+  conjectures/ground_200_corrected.tff
+  conjectures/structural_subset.tff
+  conjectures/extended_subset.tff
+  conjectures/correction_manifest.json
+
+Expected final message includes:
+
+  [OK] total=200 structural=41 extended=159 changes=25
+
+
+scripts/build_sound_tiers.py
+-----------------------------
+Deterministically generates:
+
+  theories/sound_tiers/T1_structural.tff
+  theories/sound_tiers/T2_core_no_accel.tff
+  theories/sound_tiers/T2_full_sound.tff
+  theories/sound_tiers/T3_validated_anchors.tff
+
+and all 14 ADD1/LOO ablation variants.
+
+It also generates the Tier-3 closed anchors and
+  theories/ablation_variants/manifest.json.
+
+
+scripts/run_vampire.py
+-----------------------
+Runs Vampire independently for every selected theory/conjecture pair.
+Important paper-run settings:
+
+  --timeout 60
+  --seed-mode none
+
+For every pair it creates a prover log. It also writes results.csv and
+run_metadata.json. results.csv includes the theory SHA-256, which allows the
+final validator to verify that the exact theory file was used.
+
+The runner is fail-fast on detected contradictory-axiom errors unless the
+non-paper option --continue-on-contradiction is explicitly supplied.
+
+
+scripts/run_z3.py
+------------------
+Runs the dedicated Z3 TPTP frontend z3_tptp5 independently for every selected
+theory/conjecture pair.
+
+Do NOT replace z3_tptp5 with the ordinary z3 executable.
+
+Internally the frontend is invoked in the required form:
+
+  z3_tptp5 -t:<seconds> -file:<problem-file>
+
+The older positional-file invocation was wrong. See Z3_FILEARG_FIX.md.
+
+
+scripts/run_preflight.py
+-------------------------
+Optional Vampire sanity/preflight check. It tries a deliberately false
+conjecture as a contradiction detector and runs several known-true regression
+queries. A timeout/UNKNOWN on the false consistency probe is not a proof of
+consistency; the preflight is only designed to catch obvious contradictions or
+regressions before a long run.
+
+
+scripts/run_preflight_z3.py
+----------------------------
+Equivalent preflight for z3_tptp5. It also fails if zero regression formulas
+are proved, which catches the previous failure mode where an incorrect wrapper
+returned immediate UNKNOWN for everything.
+
+
+scripts/static_oracle_check.py
+-------------------------------
+Independent semantic checker. It evaluates all semantic atoms in all 200 main
+conjectures using Python proleptic-Gregorian arithmetic and checks the closed
+Tier-3 weekday/month-length/year-span anchors.
+
+Expected result:
+
+  [INFO] conjectures: 200
+  [INFO] fully oracle-checked conjectures: 200
+  [OK] all 200 main conjectures agree with independent proleptic-Gregorian arithmetic
+
+
+scripts/audit_anchor_overlap.py
+--------------------------------
+Checks whether Tier-3 closed anchors directly coincide with benchmark targets.
+Expected final audit:
+
+  structural direct coincidences: 12
+  extended direct coincidences: 0
+
+
+scripts/verify_reported_results.py
+-----------------------------------
+Reads results.csv directly from every retained raw_results/*.zip archive and:
+  * recomputes the theorem counts used in the paper;
+  * recomputes the 41/159 structural/extended split;
+  * checks every stored theory_sha256 against the exact distributed theory;
+  * fails if a reported count or a theory hash does not match.
+
+This script is the main link between the tables in the manuscript and the raw
+CSV data.
+
+
+scripts/validate_suite.py
+--------------------------
+Top-level artifact validator. It combines the static checks and result checks.
+It validates:
+  * 200 conjectures and their 41/159 partition;
+  * the independent Gregorian oracle;
+  * Tier-3 anchors;
+  * Tier-3 target overlap;
+  * retained raw-result theorem counts;
+  * theory SHA-256 values;
+  * formula counts in T1/T2/T3;
+  * existence of all 14 ablation variants.
+
+A successful run ends with:
+
+  [OK] suite validation passed
+
+The output from the audited package is stored in VALIDATION_REPORT.txt.
+
+
+scripts/analyze_matrix.py
+--------------------------
+Convenience analysis for one results.csv. For every theory it reports:
+  * THEOREM count;
+  * status counts;
+  * median successful proof time;
+  * union/intersection of solved conjectures;
+  * theory-unique solved conjectures.
+
+Example:
+
+  python3 analyze_matrix.py ../results/E2V_full/results.csv
+
+
+scripts/summarize_results.py
+-----------------------------
+Produces compact status counts from one or more results.csv files.
+
+Example:
+
+  python3 summarize_results.py ../results/E2V_full/results.csv \
+      ../results/E2Z_full/results.csv --out ../results/summary.txt
+
+
+scripts/lib/tptp_utils.py
+--------------------------
+Shared utilities for parsing/extracting TPTP/TFF formula blocks and removing
+conjectures when theory text must be isolated.
+
+
+=======================================================================
+6. PROVER SETUP
+=======================================================================
+
+6.1 Artifact root
+------------------
+Set this to the directory containing theories/, conjectures/, scripts/, and
+raw_results/.
+
+  export ARTIFACT_ROOT="/PATH/TO/TemporalExperimentArtifact_final"
+
+The actual local Vampire executable used for the retained Vampire runs was:
+
+  /Users/panmach/vampire-provers/vampire-main/build/vampire-main
+
+Thus on the original machine:
+
+  export VAMPIRE_EXE="/Users/panmach/vampire-provers/vampire-main/build/vampire-main"
+
+For another machine, replace this with the local Vampire executable.
+
+The retained runs used Vampire 5.0.0 release build, commit b56c5534b
+(2025-10-24).
+
+
+6.2 Z3 TPTP frontend
+---------------------
+The ordinary Homebrew `z3` command is NOT the executable used in the paper.
+The dedicated z3_tptp5 frontend must be built.
+
+The actual frontend path used on the original machine was:
+
+  /Users/panmach/z3-4.15.4-tptp/release/examples/tptp_build_dir/z3_tptp5
+
+Thus on that machine:
+
+  export Z3_TPTP_EXE="$HOME/z3-4.15.4-tptp/release/examples/tptp_build_dir/z3_tptp5"
+
+The build instructions are also in Z3_TPTP_SETUP_MACOS.txt. The successful
+local build used Z3 4.15.4. If CMake rejects an old minimum-policy declaration,
+set the compatibility policy used during the successful build:
+
+  export CMAKE_POLICY_VERSION_MINIMUM=3.5
+
+A complete macOS build sequence is:
+
+  cd "$HOME"
+  rm -rf z3-4.15.4-tptp
+
+  git clone --depth 1 --branch z3-4.15.4 \
+    https://github.com/Z3Prover/z3.git \
+    z3-4.15.4-tptp
+
+  cd "$HOME/z3-4.15.4-tptp"
+  mkdir -p release
+  cd release
+
+  export CMAKE_POLICY_VERSION_MINIMUM=3.5
+
+  cmake \
+    -DZ3_BUILD_LIBZ3_SHARED=FALSE \
+    -DCMAKE_BUILD_TYPE=Release \
+    -G "Unix Makefiles" \
+    ..
+
+  cmake --build . --parallel "$(sysctl -n hw.ncpu)"
+  cmake --build . --target z3_tptp5 --parallel "$(sysctl -n hw.ncpu)"
+
+  export Z3_TPTP_EXE="$(find "$HOME/z3-4.15.4-tptp/release" \
+    -type f -name z3_tptp5 -perm -111 -print -quit)"
+
+  test -x "$Z3_TPTP_EXE" || { echo "ERROR: z3_tptp5 was not built"; exit 1; }
+  echo "$Z3_TPTP_EXE"
+
+
+=======================================================================
+7. REBUILD AND VALIDATE THE DISTRIBUTED TFF0 FILES
+=======================================================================
+
+These commands are deterministic and should reproduce the distributed files.
+They are not timing experiments.
+
+  cd "$ARTIFACT_ROOT"
+
+  python3 scripts/build_conjectures.py
+  python3 scripts/build_sound_tiers.py
+  python3 scripts/validate_suite.py
+
+Expected final lines include:
+
+  [OK] total=200 structural=41 extended=159 changes=25
+  [INFO] fully oracle-checked conjectures: 200
+  [OK] T1_structural.tff: 54 formulas
+  [OK] T2_core_no_accel.tff: 84 formulas
+  [OK] T2_full_sound.tff: 97 formulas
+  [OK] T3_validated_anchors.tff: 163 formulas
+  [OK] ablation variants: 14
+  [OK] suite validation passed
+
+Optional direct checks:
+
+  python3 scripts/static_oracle_check.py
+  python3 scripts/audit_anchor_overlap.py
+  python3 scripts/verify_reported_results.py
+
+Optional integrity check on macOS:
+
+  cd "$ARTIFACT_ROOT"
+  shasum -a 256 -c MANIFEST_SHA256.txt
+
+
+=======================================================================
+8. OPTIONAL PREFLIGHTS BEFORE THE TIMED RUNS
+=======================================================================
+
+The preflight outputs are NOT among the retained raw_results paper archives.
+They are quick sanity checks before the expensive experiments.
+
+  cd "$ARTIFACT_ROOT/scripts"
+
+  rm -rf ../results/PRECHECK_VAMPIRE
+  python3 run_preflight.py \
+    --exe "$VAMPIRE_EXE" \
+    --timeout 20
+
+  rm -rf ../results/PRECHECK_Z3
+  python3 run_preflight_z3.py \
+    --exe "$Z3_TPTP_EXE" \
+    --timeout 20
+
+
+=======================================================================
+9. RETAINED PAPER RUNS: EXACT COMMAND SEQUENCE
+=======================================================================
+
+Run these from:
+
+  cd "$ARTIFACT_ROOT/scripts"
+  mkdir -p ../results
+
+The commands below use the same relative theory/conjecture path convention
+stored in the retained run_metadata.json files.
+
+IMPORTANT:
+  * Each experiment below starts by deleting the corresponding working output
+    directory. This prevents accidental continuation of an old partial run.
+  * Do not add --seed-mode python-weekday. Paper runs used --seed-mode none.
+  * The timeout is 60 seconds for each theory/conjecture pair.
+
+
+-----------------------------------------------------------------------
+9.1 E2V_full -- Vampire, main 200-query T2-core/T2-full/T3 comparison
+-----------------------------------------------------------------------
+
+  rm -rf ../results/E2V_full
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/sound_tiers/T3_validated_anchors.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E2V_full
+
+Retained result counts:
+  T2_core_no_accel.tff   126/200
+  T2_full_sound.tff      161/200
+  T3_validated_anchors   165/200
+
+
+-----------------------------------------------------------------------
+9.2 E2Z_full -- Z3 TPTP, same main 200-query comparison
+-----------------------------------------------------------------------
+
+  rm -rf ../results/E2Z_full
+
+  python3 run_z3.py \
+    --exe "$Z3_TPTP_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/sound_tiers/T3_validated_anchors.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E2Z_full
+
+Retained result counts:
+  T2_core_no_accel.tff   138/200
+  T2_full_sound.tff       73/200
+  T3_validated_anchors    77/200
+
+
+-----------------------------------------------------------------------
+9.3 E4V_add1 -- Vampire add-one experiment for all seven components
+-----------------------------------------------------------------------
+
+  rm -rf ../results/E4V_add1
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/ablation_variants/ADD1__1y.tff \
+      ../theories/ablation_variants/ADD1__4y.tff \
+      ../theories/ablation_variants/ADD1__10y.tff \
+      ../theories/ablation_variants/ADD1__100y.tff \
+      ../theories/ablation_variants/ADD1__400y.tff \
+      ../theories/ablation_variants/ADD1__month_hopper.tff \
+      ../theories/ablation_variants/ADD1__weekday400.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E4V_add1
+
+Retained paired theorem counts:
+  T2 core             130
+  +1y                 161
+  +4y                 150
+  +10y                147
+  +100y               140
+  +400y               140
+  +month_hopper       133
+  +weekday400         124
+
+
+-----------------------------------------------------------------------
+9.4 Vampire leave-one-out experiments
+-----------------------------------------------------------------------
+
+Each archive reruns T2_full_sound and one LOO variant in the same experiment,
+so the comparison is paired. Because some cases are close to the 60-second
+limit, the full-theory baseline varies slightly from archive to archive.
+
+9.4.1 E5V_loo_1y
+
+  rm -rf ../results/E5V_loo_1y
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/ablation_variants/LOO__1y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E5V_loo_1y
+
+Retained counts: full 165, without 1y 159.
+
+
+9.4.2 E5V_loo_4y
+
+  rm -rf ../results/E5V_loo_4y
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/ablation_variants/LOO__4y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E5V_loo_4y
+
+Retained counts: full 160, without 4y 156.
+
+
+9.4.3 E5V_loo_10y
+
+  rm -rf ../results/E5V_loo_10y
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/ablation_variants/LOO__10y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E5V_loo_10y
+
+Retained counts: full 158, without 10y 160.
+
+
+9.4.4 E5V_loo_100y
+
+  rm -rf ../results/E5V_loo_100y
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/ablation_variants/LOO__100y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E5V_loo_100y
+
+Retained counts: full 157, without 100y 156.
+
+
+9.4.5 E5V_loo_400y
+
+  rm -rf ../results/E5V_loo_400y
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/ablation_variants/LOO__400y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E5V_loo_400y
+
+Retained counts: full 160, without 400y 159.
+
+
+9.4.6 E5V_loo_month_hopper
+
+  rm -rf ../results/E5V_loo_month_hopper
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/ablation_variants/LOO__month_hopper.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E5V_loo_month_hopper
+
+Retained counts: full 160, without month_hopper 158.
+
+
+9.4.7 E5V_loo_weekday400
+
+  rm -rf ../results/E5V_loo_weekday400
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/ablation_variants/LOO__weekday400.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E5V_loo_weekday400
+
+Retained counts: full 161, without weekday400 159.
+
+
+-----------------------------------------------------------------------
+9.5 Z3 add-one year-span experiments
+-----------------------------------------------------------------------
+
+The final paper retained five Z3 add-one runs: 1y, 4y, 10y, 100y, 400y.
+We deliberately did not continue with Z3 month_hopper and weekday400 after the
+strong and consistent prover-specific pattern was established. Therefore there
+are no final raw_results archives for those two Z3 add-one cases.
+
+
+9.5.1 E4Z_add1_1y
+
+  rm -rf ../results/E4Z_add1_1y
+
+  python3 run_z3.py \
+    --exe "$Z3_TPTP_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/ablation_variants/ADD1__1y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E4Z_add1_1y
+
+Retained counts: core 138, +1y 111.
+
+
+9.5.2 E4Z_add1_4y
+
+  rm -rf ../results/E4Z_add1_4y
+
+  python3 run_z3.py \
+    --exe "$Z3_TPTP_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/ablation_variants/ADD1__4y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E4Z_add1_4y
+
+Retained counts: core 138, +4y 90.
+
+
+9.5.3 E4Z_add1_10y
+
+  rm -rf ../results/E4Z_add1_10y
+
+  python3 run_z3.py \
+    --exe "$Z3_TPTP_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/ablation_variants/ADD1__10y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E4Z_add1_10y
+
+Retained counts: core 138, +10y 86.
+
+
+9.5.4 E4Z_add1_100y
+
+  rm -rf ../results/E4Z_add1_100y
+
+  python3 run_z3.py \
+    --exe "$Z3_TPTP_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/ablation_variants/ADD1__100y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E4Z_add1_100y
+
+Retained counts: core 138, +100y 91.
+
+
+9.5.5 E4Z_add1_400y
+
+  rm -rf ../results/E4Z_add1_400y
+
+  python3 run_z3.py \
+    --exe "$Z3_TPTP_EXE" \
+    --theories \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/ablation_variants/ADD1__400y.tff \
+    --conjectures ../conjectures/ground_200_corrected.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E4Z_add1_400y
+
+Retained counts: core 138, +400y 79.
+
+
+-----------------------------------------------------------------------
+9.6 E6V_quantified_T1 -- six quantified queries with Vampire
+-----------------------------------------------------------------------
+
+  rm -rf ../results/E6V_quantified_T1
+
+  python3 run_vampire.py \
+    --exe "$VAMPIRE_EXE" \
+    --theories \
+      ../theories/sound_tiers/T1_structural.tff \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/sound_tiers/T3_validated_anchors.tff \
+    --conjectures ../conjectures/quantified_T1.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E6V_quantified_T1
+
+Retained counts:
+  T1       6/6
+  T2 core  5/6
+  T2 full  5/6
+  T3       6/6
+
+
+-----------------------------------------------------------------------
+9.7 E6Z_quantified_T1 -- same six quantified queries with Z3
+-----------------------------------------------------------------------
+
+  rm -rf ../results/E6Z_quantified_T1
+
+  python3 run_z3.py \
+    --exe "$Z3_TPTP_EXE" \
+    --theories \
+      ../theories/sound_tiers/T1_structural.tff \
+      ../theories/sound_tiers/T2_core_no_accel.tff \
+      ../theories/sound_tiers/T2_full_sound.tff \
+      ../theories/sound_tiers/T3_validated_anchors.tff \
+    --conjectures ../conjectures/quantified_T1.tff \
+    --timeout 60 \
+    --seed-mode none \
+    --outdir ../results/E6Z_quantified_T1
+
+Retained counts:
+  T1       6/6
+  T2 core  5/6
+  T2 full  4/6
+  T3       4/6
+
+
+=======================================================================
+10. PACKAGING REPRODUCED OUTPUT DIRECTORIES AS RAW-RESULT ZIP FILES
+=======================================================================
+
+The experiment runners write directories under results/. The distributed
+raw_results/ directory stores ZIP archives of those directories.
+
+To avoid overwriting the retained original archives, first reproduce into a
+copy of the artifact or use a separate directory such as
+raw_results_reproduced/.
+
+From scripts/ after all runs:
+
+  mkdir -p ../raw_results_reproduced
+  cd ../results
+
+  for d in \
+    E2V_full \
+    E2Z_full \
+    E4V_add1 \
+    E4Z_add1_1y \
+    E4Z_add1_4y \
+    E4Z_add1_10y \
+    E4Z_add1_100y \
+    E4Z_add1_400y \
+    E5V_loo_1y \
+    E5V_loo_4y \
+    E5V_loo_10y \
+    E5V_loo_100y \
+    E5V_loo_400y \
+    E5V_loo_month_hopper \
+    E5V_loo_weekday400 \
+    E6V_quantified_T1 \
+    E6Z_quantified_T1
+  do
+    rm -f "../raw_results_reproduced/${d}.zip"
+    zip -r "../raw_results_reproduced/${d}.zip" "$d" \
+      -x '*.DS_Store' '__MACOSX/*' '*/._*'
+  done
+
+  cd ../scripts
+
+If one explicitly wants to recreate raw_results/ itself in a disposable copy of
+the artifact, replace raw_results_reproduced by raw_results in the commands
+above.
+
+The exact ZIP byte hashes will generally differ from the distributed original
+ZIPs because ZIP metadata (timestamps, platform metadata, compression details)
+can differ. What must match scientifically is:
+  * theory file SHA-256 values stored in results.csv;
+  * conjecture names;
+  * prover/status/timing records from the rerun, subject to ordinary timing
+    variability;
+  * theorem counts under the stated 60-second resource bound.
+
+
+=======================================================================
+11. ANALYZE A FRESH RUN
+=======================================================================
+
+Example: E2 Vampire matrix.
+
+From scripts/:
+
+  python3 analyze_matrix.py \
+    ../results/E2V_full/results.csv \
+    --out ../results/E2V_full/analysis.txt
+
+Example: Z3 matrix.
+
+  python3 analyze_matrix.py \
+    ../results/E2Z_full/results.csv \
+    --out ../results/E2Z_full/analysis.txt
+
+Compact status summary:
+
+  python3 summarize_results.py \
+    ../results/E2V_full/results.csv \
+    ../results/E2Z_full/results.csv \
+    --out ../results/E2_summary.txt
+
+For the official retained archives, use the stronger integrated checker:
+
+  cd "$ARTIFACT_ROOT"
+  python3 scripts/verify_reported_results.py
+
+
+=======================================================================
+12. FINAL END-TO-END VALIDATION
+=======================================================================
+
+After rebuilding or before submitting the artifact, run:
+
+  cd "$ARTIFACT_ROOT"
+  python3 scripts/validate_suite.py
+
+The audited distributed artifact reports:
+
+  [INFO] conjectures: 200
+  [INFO] fully oracle-checked conjectures: 200
+  [OK] all 200 main conjectures agree with independent proleptic-Gregorian arithmetic
+  [OK] closed Tier-3 weekday, month-length, and year-span anchors passed independent checks
+  [INFO] Tier-3 anchor/structural-target direct coincidences: 12
+  [INFO] Tier-3 anchor/extended-target direct coincidences: 0
+  [OK] every retained raw result row refers to the exact distributed theory SHA-256
+  [OK] all theorem-count tables used in the audited manuscript reproduce from retained CSV data
+  [OK] T1_structural.tff: 54 formulas
+  [OK] T2_core_no_accel.tff: 84 formulas
+  [OK] T2_full_sound.tff: 97 formulas
+  [OK] T3_validated_anchors.tff: 163 formulas
+  [OK] ablation variants: 14
+  [OK] suite validation passed
+
+
+=======================================================================
+13. QUICK REFERENCE: WHICH FILE WAS USED WHERE?
+=======================================================================
+
+E2V_full / E2Z_full
+  conjectures: ground_200_corrected.tff
+  theories:
+    T2_core_no_accel.tff
+    T2_full_sound.tff
+    T3_validated_anchors.tff
+
+E4V_add1
+  conjectures: ground_200_corrected.tff
+  theories:
+    T2_core_no_accel.tff
+    all seven ADD1__*.tff variants
+
+E4Z_add1_1y ... E4Z_add1_400y
+  conjectures: ground_200_corrected.tff
+  theories in each archive:
+    T2_core_no_accel.tff
+    one ADD1__<year-span>.tff variant
+
+E5V_loo_*
+  conjectures: ground_200_corrected.tff
+  theories in each archive:
+    T2_full_sound.tff
+    one LOO__*.tff variant
+
+E6V_quantified_T1 / E6Z_quantified_T1
+  conjectures: quantified_T1.tff
+  theories:
+    T1_structural.tff
+    T2_core_no_accel.tff
+    T2_full_sound.tff
+    T3_validated_anchors.tff
+
+structural_subset.tff and extended_subset.tff
+  used to classify the E2 results after the run; no separate final timing run
+  is necessary for the paper's structural/extended table.
+
+quantified_T2.tff
+  distributed but not part of a retained raw-results timing archive in the
+  final paper artifact.
+
+
+=======================================================================
+14. IMPORTANT REPRODUCIBILITY NOTES
+=======================================================================
+
+1. Do not use an ordinary z3 executable for the Z3 experiments. Use z3_tptp5.
+
+2. Do not add Python answer facts to paper runs. All retained final runs use:
+
+     --seed-mode none
+
+3. Do not substitute old theory files. Each retained CSV stores theory_sha256,
+   and verify_reported_results.py checks it against the distributed files.
+
+4. Do not interpret timeout variability as logical inconsistency. These are
+   resource-bounded proof-search experiments. Near the 60-second boundary, the
+   exact number of solved cases can vary slightly between separate paired runs.
+   This is why leave-one-out comparisons are interpreted within their own
+   archive.
+
+5. T3 is not described as having zero overlap with every benchmark target.
+   The final anchor audit explicitly reports 12 structural coincidences and
+   zero extended-subset coincidences.
+
+6. The main benchmark used for paper timing is ground_200_corrected.tff, not
+   source_benchmark_raw.tff.
+
+7. The 25 benchmark corrections are documented in correction_manifest.json and
+   are independently checked by static_oracle_check.py.
+
+8. The exact theory files used by the retained experiments should not be edited
+   after the fact. If a theory is modified, it becomes a new experiment and
+   must receive new raw results and new hashes.
+
+9. Re-running a theorem prover can change wall-clock times and a few
+   timeout-boundary outcomes because of machine load and environment. The
+   retained raw_results archives are the primary record of the paper runs.
+
+10. Run scripts create one fresh prover process for each theory/conjecture pair.
+    They do not implement a first-success portfolio in the final experiments.
+
+
+END OF STEP-BY-STEP REPRODUCTION GUIDE

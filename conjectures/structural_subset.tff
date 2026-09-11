@@ -1,0 +1,85 @@
+% T1 structural subset extracted from ground_200_corrected.tff
+
+tff(test_1776, conjecture, ?[N:day_name]: (weekday(ymd(1776, 7, 4), N) & N=thursday)).
+
+tff(test_moon, conjecture, ?[N:day_name]: (weekday(ymd(1969, 7, 20), N) & N=sunday)).
+
+tff(test_bttf, conjecture, ?[N:day_name]: (weekday(ymd(1985, 10, 26), N) & N=saturday)).
+
+tff(test_1600, conjecture, ?[N:day_name]: (weekday(ymd(1600, 1, 1), N) & N=saturday)).
+
+tff(test_2030, conjecture, ?[N:day_name]: (weekday(ymd(2030, 1, 1), N) & N=tuesday)).
+
+tff(test_leap_wk, conjecture, ?[N:day_name]: (weekday(ymd(2024, 2, 29), N) & N=thursday)).
+
+tff(test_wk_oct31_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 10, 31), N) & N=thursday)).
+
+tff(test_wk_dec25_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 12, 25), N) & N=wednesday)).
+
+tff(test_wk_2024_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2024, 7, 4), N) & N=thursday)).
+
+tff(test_wk_2025_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2025, 7, 4), N) & N=friday)).
+
+tff(test_wk_2026_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2026, 7, 4), N) & N=saturday)).
+
+tff(test_wk_2027_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2027, 7, 4), N) & N=sunday)).
+
+tff(test_wk_2028_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2028, 7, 4), N) & N=tuesday)).
+
+tff(test_wk_2029_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2029, 7, 4), N) & N=wednesday)).
+
+tff(test_wk_2030_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2030, 7, 4), N) & N=thursday)).
+
+tff(test_wk_2031_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2031, 7, 4), N) & N=friday)).
+
+tff(test_wk_2032_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2032, 7, 4), N) & N=sunday)).
+
+tff(test_wk_2033_jul4, conjecture, ?[N:day_name]: (weekday(ymd(2033, 7, 4), N) & N=monday)).
+
+tff(test_wk_jan1_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 1, 1), N) & N=monday)).
+
+tff(test_wk_feb29_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 2, 29), N) & N=thursday)).
+
+tff(test_wk_mar1_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 3, 1), N) & N=friday)).
+
+tff(test_wk_dec31_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 12, 31), N) & N=tuesday)).
+
+tff(test_wk_jan1_2025, conjecture, ?[N:day_name]: (weekday(ymd(2025, 1, 1), N) & N=wednesday)).
+
+tff(test_wk_feb1_2025, conjecture, ?[N:day_name]: (weekday(ymd(2025, 2, 1), N) & N=saturday)).
+
+tff(test_wk_feb28_2025, conjecture, ?[N:day_name]: (weekday(ymd(2025, 2, 28), N) & N=friday)).
+
+tff(test_wk_mar1_2025, conjecture, ?[N:day_name]: (weekday(ymd(2025, 3, 1), N) & N=saturday)).
+
+tff(test_wk_year1, conjecture, ?[N:day_name]: (weekday(ymd(1, 1, 1), N) & N=monday)).
+
+tff(test_wk_2030_dec31, conjecture,
+    weekday(ymd(2030, 12, 31), tuesday)
+).
+
+tff(test_wk_jun15_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 6, 15), N) & N=saturday)).
+
+tff(test_wk_aug15_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 8, 15), N) & N=thursday)).
+
+tff(test_wk_sept1_2024, conjecture, ?[N:day_name]: (weekday(ymd(2024, 9, 1), N) & N=sunday)).
+
+tff(test_leap_def_2024, conjecture, ?[D:$int]: (is_days_in_month(2, 2024, D) & D=29)).
+
+tff(test_leap_def_2025, conjecture, ?[D:$int]: (is_days_in_month(2, 2025, D) & D=28)).
+
+tff(test_leap_def_2000, conjecture, ?[D:$int]: (is_days_in_month(2, 2000, D) & D=29)).
+
+tff(test_leap_def_1900, conjecture, ?[D:$int]: (is_days_in_month(2, 1900, D) & D=28)).
+
+tff(test_leap_def_1600, conjecture, ?[D:$int]: (is_days_in_month(2, 1600, D) & D=29)).
+
+tff(test_leap_def_2100, conjecture, ?[D:$int]: (is_days_in_month(2, 2100, D) & D=28)).
+
+tff(test_leap_def_2400, conjecture, ?[D:$int]: (is_days_in_month(2, 2400, D) & D=29)).
+
+tff(test_leap_def_1904, conjecture, ?[D:$int]: (is_days_in_month(2, 1904, D) & D=29)).
+
+tff(test_leap_def_1903, conjecture, ?[D:$int]: (is_days_in_month(2, 1903, D) & D=28)).
+
+tff(test_leap_def_3996, conjecture, ?[D:$int]: (is_days_in_month(2, 3996, D) & D=29)).

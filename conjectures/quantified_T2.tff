@@ -1,0 +1,25 @@
+% Quantified/relational queries requiring T2 vocabulary.
+
+tff(q7_no_fifth_friday_feb2025, conjecture,
+ ~ ?[D:$int]: nth_weekday_date(5,friday,2,2025,ymd(2025,2,D))).
+
+tff(q8_fifth_thursday_feb2024_unique, conjecture,
+ (nth_weekday_date(5,thursday,2,2024,ymd(2024,2,29)) &
+  ![D:$int]: (nth_weekday_date(5,thursday,2,2024,ymd(2024,2,D)) => D=29))).
+
+tff(q9_nth_weekday_always_valid, conjecture,
+ ![N:$int,W:day_name,M:$int,Y:$int,D:$int]:
+  (nth_weekday_date(N,W,M,Y,ymd(Y,M,D)) => valid_date(Y,M,D))).
+
+tff(q10_last_weekday_always_valid, conjecture,
+ ![W:day_name,M:$int,Y:$int,D:$int]:
+  (last_weekday_date(W,M,Y,ymd(Y,M,D)) => valid_date(Y,M,D))).
+
+tff(q11_date_result_unique, conjecture,
+ ![I:$int,M:$int,Y:$int,R1:date,R2:date]:
+  ((calc_date(I,M,Y,R1) & calc_date(I,M,Y,R2)) => R1=R2)).
+
+tff(q12_time_normalization_unique, conjecture,
+ ![SH:$int,SM:$int,AH:$int,AM:$int,H1:$int,M1:$int,D1:$int,H2:$int,M2:$int,D2:$int]:
+  ((normalize_time(SH,SM,AH,AM,H1,M1,D1) & normalize_time(SH,SM,AH,AM,H2,M2,D2))
+   => (H1=H2 & M1=M2 & D1=D2))).
